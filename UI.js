@@ -22,23 +22,23 @@ class UI {
             const td = document.createElement("td")
 
             for (let i = 0; i < 2; i++) {
+                let icon
+
                 const button = document.createElement("button")
                 button.dataset.contactid = contact.id
                 button.dataset.contactname = contact.name
                 button.classList.add("btn", "btn-sm", "mx-1")
 
-                const icon = document.createElement("i")
-
                 if (i == 0) {
                     button.classList.add("delete-contact", "btn-danger")
                     button.setAttribute("title", "delete this contact")
-                    icon.classList.add("bi", "bi-trash")
+                    icon = this.createIcons("bi", "bi-trash")
                 } else {
                     button.classList.add("change-contact", "btn-warning")
                     button.setAttribute("title", "change this contact")
                     button.dataset.bsToggle = "modal"
                     button.dataset.bsTarget = "#formModal"
-                    icon.classList.add("bi", "bi-pencil-square")
+                    icon = this.createIcons("bi", "bi-pencil-square")
                 }
 
                 button.append(icon)
@@ -64,6 +64,15 @@ class UI {
         divAlert.setAttribute("role", "alert")
 
         const strong = document.createElement("strong")
+
+        let icon
+        if (type == "danger") {
+            icon = this.createIcons("bi", "bi-exclamation-circle-fill", "me-2")
+        } else if (type == "success") {
+            icon = this.createIcons("bi", "bi-check-circle", "me-2")
+        }
+
+        strong.append(icon)
         strong.append(document.createTextNode(msg))
 
         const button = document.createElement("button")
@@ -120,5 +129,11 @@ class UI {
             modalLabel.textContent = "Change Contact"
             btnSubmit.textContent = "Change"
         }
+    }
+
+    createIcons(name, type, margin) {
+        const icon = document.createElement("i")
+        icon.classList.add(name, type, margin)
+        return icon
     }
 }
