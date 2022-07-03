@@ -1,0 +1,26 @@
+body {
+    font-family: 'Oswald', sans-serif;
+}
+
+.search-input {
+    position: relative;
+}
+
+.search-input span {
+    position: absolute;
+    top: 6px;
+    left: 15px;
+    padding: 0 10px;
+    transition: .8s;
+}
+
+.search-input input[type="search"]:required:focus~span,
+.search-input input[type="search"]:required:valid~span {
+    top: -15px;
+    background-color: #fff;
+    color: rgba(2, 117, 216, .75);
+}
+
+i {
+    pointer-events: none;
+}
