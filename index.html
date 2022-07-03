@@ -31,7 +31,7 @@
 
         <section id="tools">
             <div class="row">
-                <div class="col-md-auto my-2">
+                <div class="col-md-auto my-2 button-tools">
                     <!-- Button trigger modal -->
                     <button class="btn btn-primary add-contact" data-bs-toggle="modal" data-bs-target="#formModal">
                         <i class="bi bi-plus-circle me-1"></i>
@@ -54,12 +54,14 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col"></th>
-                        <th scope="col">id</th>
-                        <th scope="col">name</th>
-                        <th scope="col">phone</th>
-                        <th scope="col">email</th>
-                        <th scope="col">options</th>
+                        <th scope="col">
+                            <button class="btn btn-sm btn-primary mb-1 selected-all">all</button>
+                        </th>
+                        <th scope="col" class="pb-3">id</th>
+                        <th scope="col" class="pb-3">name</th>
+                        <th scope="col" class="pb-3">phone</th>
+                        <th scope="col" class="pb-3">email</th>
+                        <th scope="col" class="pb-3">options</th>
                     </tr>
                 </thead>
                 <tbody></tbody>

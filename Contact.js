@@ -20,7 +20,8 @@ class Contact {
         return id
     }
 
-    createContact(contact) {
+    createContact(id, name, phone, email) {
+        const contact = { id, name, phone, email }
         const contacts = this.loadContacts()
         contacts.push(contact)
         localStorage.setItem("contactApp", JSON.stringify(contacts))

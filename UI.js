@@ -9,7 +9,7 @@ class UI {
             const checkbox = document.createElement("input")
             checkbox.setAttribute("type", "checkbox")
             checkbox.setAttribute("value", contact.id)
-            checkbox.classList.add("form-check-input", "ms-2", "mt-2")
+            checkbox.classList.add("form-check-input", "my-3", "ms-2", "ps-3")
 
             row.append(checkbox)
 
@@ -48,6 +48,36 @@ class UI {
             row.append(td)
             rows.append(row)
         })
+
+        this.hiddenElements(rows.innerHTML)
+    }
+
+    hiddenElements(conditions) {
+        const contactList = document.getElementById("contact-list")
+        const btnShowCheckbox = document.querySelector(".selected-contact")
+        const inputSearch = document.querySelector("input[type='search']")
+        const inputSearchLabel = inputSearch.nextElementSibling
+
+        const btnRemoveSelected = document.querySelector(".remove-selected")
+        if (btnRemoveSelected) {
+            btnRemoveSelected.remove()
+        }
+
+        const btnSelectedContact = document.querySelector(".selected-contact")
+        btnSelectedContact.classList.remove("active")
+
+        if (conditions == "") {
+            contactList.style.display = "none"
+            btnShowCheckbox.style.display = "none"
+            inputSearch.style.display = "none"
+            inputSearchLabel.style.display = "none"
+        } else {
+            contactList.style.display = "block"
+            btnShowCheckbox.style.display = "inline-block"
+            inputSearch.style.display = "inline-block"
+            inputSearchLabel.style.display = "inline-block"
+        }
+
     }
 
     clearForm(form) {
@@ -88,6 +118,10 @@ class UI {
         const tools = document.getElementById("tools")
 
         container.insertBefore(divAlert, tools)
+
+        setTimeout(() => {
+            divAlert.remove()
+        }, 3000)
     }
 
     removeAlert() {

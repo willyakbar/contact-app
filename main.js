@@ -27,7 +27,6 @@ form.addEventListener("submit", function (e) {
     const email = this[3].value
 
     const contacts = app.loadContacts()
-    const contact = { id, name, phone, email }
 
     if (submitType == "add") {
         const nameExist = contacts.find(contact => contact.name == name.toLowerCase())
@@ -40,7 +39,7 @@ form.addEventListener("submit", function (e) {
         } else if (emailExist) {
             ui.showAlert(`this email " ${email} " has been used .`, "danger")
         } else {
-            app.createContact(contact)
+            app.createContact(id, name, phone, email)
             ui.updateUI(app.loadContacts())
             ui.showAlert("New Contact Added", "success")
             ui.clearForm(this)
@@ -48,7 +47,7 @@ form.addEventListener("submit", function (e) {
     } else if (submitType == "change") {
         const newContacts = contacts.filter(contact => contact.id !== id)
         app.updateContacts(newContacts)
-        app.createContact(contact)
+        app.createContact(id, name, phone, email)
         ui.updateUI(app.loadContacts())
         ui.showAlert("Contact Changed", "success")
         ui.clearForm(this)
@@ -95,8 +94,10 @@ document.addEventListener("click", e => {
         const td = document.querySelector("#contact-list tr th:first-child")
         const checkBoxs = document.querySelectorAll(".form-check-input")
 
+        // button selected active
         if (button.classList.contains("active")) {
             td.classList.add("active")
+
             const icon = ui.createIcons("bi", "bi-x-circle", "me-2")
             button.append(icon)
             button.append(document.createTextNode("Cancel"))
@@ -105,7 +106,15 @@ document.addEventListener("click", e => {
             checkBoxs.forEach(checkbox => {
                 checkbox.classList.add("active")
             })
+
+            const buttonRemoveSelected = document.createElement("button")
+            buttonRemoveSelected.classList.add("btn", "btn-danger", "remove-selected")
+            buttonRemoveSelected.append(document.createTextNode("Remove"))
+
+            const areaButtonTools = document.querySelector(".button-tools")
+            areaButtonTools.append(buttonRemoveSelected)
         } else {
+            document.querySelector(".btn.remove-selected").remove()
             const icon = ui.createIcons("bi", "bi-list-check", "me-2")
             button.append(icon)
             button.append(document.createTextNode("Selected"))
@@ -116,6 +125,45 @@ document.addEventListener("click", e => {
                 checkbox.classList.remove("active")
                 checkbox.checked = false
             })
+        }
+    }
+
+    // button selectd all
+    if (e.target.classList.contains("selected-all")) {
+        const button = e.target
+        button.classList.toggle("active")
+
+        const inputCheckBox = document.querySelectorAll(".form-check-input")
+        if (button.classList.contains("active")) {
+            inputCheckBox.forEach(input => input.checked = true)
+        } else {
+            inputCheckBox.forEach(input => input.checked = false)
+        }
+    }
+
+    // button remove selected
+    if (e.target.classList.contains("remove-selected")) {
+        const checkbox = document.querySelectorAll(".form-check-input")
+        const selectdContacts = []
+        checkbox.forEach(item => {
+            if (item.checked == true) {
+                selectdContacts.push(item)
+            }
+        })
+
+        if (selectdContacts == "") {
+            ui.showAlert("nothing been selected yet .", "danger")
+            return false
+        }
+
+        if (confirm("Are you sure to remove some contacts ?")) {
+            selectdContacts.forEach(selected => {
+                const contacts = app.loadContacts()
+                const newContacts = contacts.filter(contact => contact.id !== selected.value)
+                app.updateContacts(newContacts)
+            })
+            ui.showAlert("some contacts has been removed .", "danger")
+            ui.updateUI(app.loadContacts())
         }
     }
 })
