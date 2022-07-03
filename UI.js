@@ -80,7 +80,15 @@ class UI {
         }
     }
 
-    changeModalForm() {
-
+    setModalForm(type) {
+        if (type == "addContact") {
+            const modal = document.getElementById("formModal")
+            modal.addEventListener("shown.bs.modal", () => {
+                formAdd[0].value = app.makeContactId()
+                formAdd[1].focus()
+            })
+            document.getElementById("formModalLabel").textContent = "Add New Contact"
+            document.querySelector("#formModal button[type='submit']").textContent = "Add"
+        }
     }
 }
