@@ -80,15 +80,37 @@ class UI {
         }
     }
 
-    setModalForm(type) {
+    setModalForm(type, contact) {
+        const modal = document.getElementById("formModal")
+        const form = document.getElementById("form")
+        const modalLabel = document.getElementById("formModalLabel")
+        const btnSubmit = document.querySelector("#formModal button[type='submit']")
+
         if (type == "addContact") {
-            const modal = document.getElementById("formModal")
             modal.addEventListener("shown.bs.modal", () => {
-                formAdd[0].value = app.makeContactId()
-                formAdd[1].focus()
+                form.dataset.typeForm = "add"
+                form[0].value = app.makeContactId()
+                form[1].focus()
             })
-            document.getElementById("formModalLabel").textContent = "Add New Contact"
-            document.querySelector("#formModal button[type='submit']").textContent = "Add"
+            modalLabel.textContent = "Add New Contact"
+            btnSubmit.textContent = "Add"
+        }
+
+        if (type == "changeContact") {
+            modal.addEventListener("shown.bs.modal", () => {
+                form.dataset.typeForm = "change"
+                form[0].value = contact.id
+                form[1].value = contact.name
+                form[1].setAttribute("readonly", "true")
+
+                form[2].value = contact.phone
+                form[2].focus()
+
+                form[3].value = contact.email
+                form[3].setAttribute("readonly", "true")
+            })
+            modalLabel.textContent = "Change Contact"
+            btnSubmit.textContent = "Change"
         }
     }
 }
