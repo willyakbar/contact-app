@@ -24,3 +24,21 @@ body {
 i {
     pointer-events: none;
 }
+
+#contact-list tr th:first-child {
+    border: none;
+}
+
+#contact-list tr input {
+    cursor: pointer;
+}
+
+#contact-list tr th:first-child,
+#contact-list tr input {
+    display: none;
+}
+
+#contact-list tr th:first-child.active,
+#contact-list tr input.active {
+    display: block;
+}

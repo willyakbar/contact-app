@@ -5,6 +5,14 @@ class UI {
 
         contacts.forEach(contact => {
             const row = document.createElement("tr")
+
+            const checkbox = document.createElement("input")
+            checkbox.setAttribute("type", "checkbox")
+            checkbox.setAttribute("value", contact.id)
+            checkbox.classList.add("form-check-input", "ms-2", "mt-2")
+
+            row.append(checkbox)
+
             Object.entries(contact).forEach(item => {
                 const td = document.createElement("td")
                 td.append(document.createTextNode(item[1]))
@@ -36,8 +44,8 @@ class UI {
                 button.append(icon)
                 td.append(button)
             }
-            row.append(td)
 
+            row.append(td)
             rows.append(row)
         })
     }

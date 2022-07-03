@@ -81,4 +81,25 @@ document.addEventListener("click", e => {
         const contact = contacts.find(contact => contact.id == id)
         ui.setModalForm("changeContact", contact)
     }
+
+    if (e.target.classList.contains("selected-contact")) {
+        const button = e.target
+        button.classList.toggle("active")
+
+        const td = document.querySelector("#contact-list tr th:first-child")
+        const checkBoxs = document.querySelectorAll(".form-check-input")
+
+        if (button.classList.contains("active")) {
+            td.classList.add("active")
+            checkBoxs.forEach(checkbox => {
+                checkbox.classList.add("active")
+            })
+        } else {
+            td.classList.remove("active")
+            checkBoxs.forEach(checkbox => {
+                checkbox.classList.remove("active")
+                checkbox.checked = false
+            })
+        }
+    }
 })
