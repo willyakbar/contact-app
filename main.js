@@ -88,6 +88,11 @@ document.addEventListener("click", e => {
     // button show checkbox on tools
     if (e.target.classList.contains("selected-contact")) {
         const button = e.target
+
+        if (document.querySelector("#contact-list tbody").innerHTML == "") {
+            return e.preventDefault()
+        }
+
         button.classList.toggle("active")
         button.innerHTML = ""
 

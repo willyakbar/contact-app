@@ -48,36 +48,6 @@ class UI {
             row.append(td)
             rows.append(row)
         })
-
-        this.hiddenElements(rows.innerHTML)
-    }
-
-    hiddenElements(conditions) {
-        const contactList = document.getElementById("contact-list")
-        const btnShowCheckbox = document.querySelector(".selected-contact")
-        const inputSearch = document.querySelector("input[type='search']")
-        const inputSearchLabel = inputSearch.nextElementSibling
-
-        const btnRemoveSelected = document.querySelector(".remove-selected")
-        if (btnRemoveSelected) {
-            btnRemoveSelected.remove()
-        }
-
-        const btnSelectedContact = document.querySelector(".selected-contact")
-        btnSelectedContact.classList.remove("active")
-
-        if (conditions == "") {
-            contactList.style.display = "none"
-            btnShowCheckbox.style.display = "none"
-            inputSearch.style.display = "none"
-            inputSearchLabel.style.display = "none"
-        } else {
-            contactList.style.display = "block"
-            btnShowCheckbox.style.display = "inline-block"
-            inputSearch.style.display = "inline-block"
-            inputSearchLabel.style.display = "inline-block"
-        }
-
     }
 
     clearForm(form) {
